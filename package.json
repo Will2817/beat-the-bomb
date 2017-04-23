@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://will2817.github.io/beat-the-bomb/",
   "dependencies": {
+    "material-ui": "^1.0.0-alpha.11",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
