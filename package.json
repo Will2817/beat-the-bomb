@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://will2817.github.io/beat-the-bomb/",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
