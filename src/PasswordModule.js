@@ -1,31 +1,32 @@
 import React, { Component } from 'react'
 
-const bombPasswords = ['about', 'after', 'again', 'below', 'could',
-                       'every', 'first', 'found', 'great', 'house',
-                       'large', 'learn', 'never', 'other', 'place',
-                       'plant', 'point', 'right', 'small', 'sound',
-                       'spell', 'still', 'study', 'their', 'there',
-                       'these', 'thing', 'think', 'three', 'water',
-                       'where', 'which', 'world', 'would', 'write']
+const bombPasswords = [
+  'about', 'after', 'again', 'below', 'could',
+  'every', 'first', 'found', 'great', 'house',
+  'large', 'learn', 'never', 'other', 'place',
+  'plant', 'point', 'right', 'small', 'sound',
+  'spell', 'still', 'study', 'their', 'there',
+  'these', 'thing', 'think', 'three', 'water',
+  'where', 'which', 'world', 'would', 'write']
 
-//TODO handle changes to dial after passwords have been filtered
-//TODO layout/components
+// TODO handle changes to dial after passwords have been filtered
+// TODO layout/components
 
 class PasswordModule extends Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       dials: Array(5).fill(''),
       passwords: bombPasswords.slice()
     }
   }
-  updateLetters(i, event) {
+  updateLetters (i, event) {
     const dials = this.state.dials.slice()
     const letters = event.target.value
     dials[i] = letters
     let passwords = this.state.passwords.slice()
     if (letters.length === 6) {
-      passwords = passwords.filter(function(word){
+      passwords = passwords.filter(function (word) {
         return letters.includes(word.charAt(i))
       })
     }
@@ -35,15 +36,15 @@ class PasswordModule extends Component {
       passwords: passwords
     })
   }
-  renderDial(index, value) {
+  renderDial (index, value) {
     return (
       <div key={index}>
         <label>Dial {index}</label>
-        <input type="text" value={value} onChange={(e) => this.updateLetters(index, e)} />
+        <input type='text' value={value} onChange={(e) => this.updateLetters(index, e)} />
       </div>
     )
   }
-  render() {
+  render () {
     const dials = this.state.dials.map((letters, index) =>
       this.renderDial(index, letters)
     )
