@@ -9,7 +9,6 @@ const bombPasswords = [
   'these', 'thing', 'think', 'three', 'water',
   'where', 'which', 'world', 'would', 'write']
 
-// TODO handle changes to dial after passwords have been filtered
 // TODO layout/components
 
 class PasswordModule extends Component {
@@ -23,12 +22,19 @@ class PasswordModule extends Component {
   updateLetters (i, event) {
     const dials = this.state.dials.slice()
     const letters = event.target.value
+    // Prevent entering extra letters
+    if (letters.length > 6) {
+      return
+    }
     dials[i] = letters
-    let passwords = this.state.passwords.slice()
-    if (letters.length === 6) {
-      passwords = passwords.filter(function (word) {
-        return letters.includes(word.charAt(i))
-      })
+    // Update remaining possible passwords
+    let passwords = bombPasswords.slice()
+    for (var dial in dials) {
+      if (dials[dial].length === 6) {
+        passwords = passwords.filter(function (word) {
+          return dials[dial].includes(word.charAt(dial))
+        })
+      }
     }
 
     this.setState({
@@ -40,7 +46,8 @@ class PasswordModule extends Component {
     return (
       <div key={index}>
         <label>Dial {index}</label>
-        <input type='text' value={value} onChange={(e) => this.updateLetters(index, e)} />
+        <input type='text' value={value}
+          onChange={(e) => this.updateLetters(index, e)} />
       </div>
     )
   }
@@ -57,7 +64,7 @@ class PasswordModule extends Component {
       <div>
         <h2>Dials</h2>
         {dials}
-        <h2>Remaining Passwords</h2>
+        <h2>{passwords.length > 1 ? 'Remaining Passwords' : 'Password'}</h2>
         <ul> {passwords} </ul>
       </div>
     )
