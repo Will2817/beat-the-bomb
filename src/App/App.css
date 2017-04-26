@@ -7,3 +7,9 @@
 .root-layout {
   height: 100%;
 }
+
+.ant-layout-header {
+  background: 0;
+  border-bottom: solid #999999;
+  height: auto;
+}

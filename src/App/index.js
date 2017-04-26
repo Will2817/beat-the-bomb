@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Layout } from 'antd'
 import './App.css'
 import SideBar from '../SideBar'
-// import BombInfo from './BombInfo'
+import BombInfo from '../BombInfo'
 
 const { Header, Sider, Content } = Layout
 
@@ -11,7 +11,11 @@ class App extends Component {
     super()
     this.state = {
       collapsed: false,
-      mode: 'inline'
+      mode: 'inline',
+      bombInfo: {
+        numBatteries: 0,
+        numStrikes: 0
+      }
     }
   }
   onCollapse (collapsed) {
@@ -20,6 +24,11 @@ class App extends Component {
       mode: collapsed ? 'vertical' : 'inline'
     })
   }
+  handleFieldChange (fieldId, value) {
+    var bombInfo = {...this.state.bombInfo}
+    bombInfo[fieldId] = value
+    this.setState({bombInfo})
+  }
   render () {
     return (
       <Layout className='root-layout'>
@@ -27,8 +36,8 @@ class App extends Component {
           <SideBar mode={this.state.mode} />
         </Sider>
         <Layout>
-          <Header>Bomb Info Page</Header>
-          <Content>Content</Content>
+          <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>
+          <Content>Number of batteries: {this.state.bombInfo.numBatteries}</Content>
         </Layout>
       </Layout>
     )
