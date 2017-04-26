@@ -9,6 +9,7 @@ class SideBar extends Component {
 
   }
   render () {
+
     return (
       <div>
         <div className='side-bar-logo'>B<span className='hidden-logo-text'>eat The Bomb</span></div>
@@ -23,7 +24,7 @@ class SideBar extends Component {
             <Menu.Item key='2'>Option 2</Menu.Item>
           </ItemGroup>
           <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Module</span></span>}>
-            <Menu.Item key='5'>Option 5<Icon type='plus' /></Menu.Item>
+            <Menu.Item key='5' onclick={this.props} >Option 5<Icon type='plus' /></Menu.Item>
             <Menu.Item key='6'>Option 6<Icon type='plus' /></Menu.Item>
           </ItemGroup>
         </Menu>
