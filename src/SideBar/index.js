@@ -6,13 +6,14 @@ const ItemGroup = Menu.ItemGroup
 
 class SideBar extends Component {
   handleClick (e) {
-    console.log(e.key)
     this.props.addModule(e.key)
   }
   render () {
-    const menuItems = this.props.modules.map((module, index) =>
-      <Menu.Item key={index}>Module {index}</Menu.Item>
-    )
+    const menuItems = this.props.modules.map((module, index) => {
+      // TODO might need module to have a unique id
+      // not sure what will happen when remove is implemented
+      return <Menu.Item key={index}>{module.type}</Menu.Item>
+    })
 
     return (
       <div>
@@ -27,7 +28,7 @@ class SideBar extends Component {
             {menuItems}
           </ItemGroup>
           <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Module</span></span>}>
-            <Menu.Item key='password'>Password<Icon type='plus' /></Menu.Item>
+            <Menu.Item key='Password'>Password<Icon type='plus' /></Menu.Item>
 
           </ItemGroup>
         </Menu>

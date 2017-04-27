@@ -17,9 +17,7 @@ class App extends Component {
         numBatteries: 0,
         numStrikes: 0
       },
-      modules: [{
-        type: 'password'
-      }]
+      modules: []
     }
   }
   onCollapse (collapsed) {
@@ -34,17 +32,19 @@ class App extends Component {
     this.setState({bombInfo})
   }
   addModule (type) {
-    console.log(`adding type: ${type}`)
     var modules = this.state.modules.slice()
     modules.push({type})
     this.setState({modules})
   }
   render () {
-    const modules = this.state.modules.map((module) => {
+    const modules = this.state.modules.map((module, index) => {
       switch (module.type) {
-        case 'password': {
-          return <PasswordModule />
+        case 'Password': {
+          // TODO might need module to have a unique id
+          // not sure what will happen when remove is implemented
+          return <PasswordModule key={index} />
         }
+        default: return null
       }
     })
 
