@@ -21,13 +21,21 @@ class SideBar extends Component {
         <Menu
           className='side-bar-menu'
           theme='dark'
-          onClick={(e) => this.props.addModule(e.key)}
           mode={this.props.mode}
+          selectable={false}
         >
           <ItemGroup key='sub1' title={<span><Icon type='rocket' /><span className='nav-text'>Active Modules</span></span>}>
             {menuItems}
           </ItemGroup>
-          <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Module</span></span>}>
+        </Menu>
+        <Menu
+          className='side-bar-menu'
+          theme='dark'
+          onClick={(e) => this.props.addModule(e.key)}
+          mode={this.props.mode}
+          selectable={false}
+        >
+          <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Modules</span></span>}>
             <Menu.Item key='Password'>Password<Icon type='plus' /></Menu.Item>
 
           </ItemGroup>
