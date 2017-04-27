@@ -17,9 +17,9 @@ class App extends Component {
         numBatteries: 0,
         numStrikes: 0
       },
-      modules: [
-        new PasswordModule()
-      ]
+      modules: [{
+        type: 'password'
+      }]
     }
   }
   onCollapse (collapsed) {
@@ -33,22 +33,25 @@ class App extends Component {
     bombInfo[fieldId] = value
     this.setState({bombInfo})
   }
-  addModule (moduleType) {
-    var modules = {...this.state.modules}
-    switch (moduleType) {
-      case 'PasswordModule': modules.add(PasswordModule)
-    }
+  addModule (type) {
+    console.log(`adding type: ${type}`)
+    var modules = this.state.modules.slice()
+    modules.push({type})
     this.setState({modules})
   }
   render () {
-    const modules = this.state.modules.map((module) =>
-      module.render()
-    )
+    const modules = this.state.modules.map((module) => {
+      switch (module.type) {
+        case 'password': {
+          return <PasswordModule />
+        }
+      }
+    })
 
     return (
       <Layout className='root-layout'>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse.bind(this)} >
-          <SideBar mode={this.state.mode} modules={this.modules} addModule={this.addModule.bind(this)} />
+          <SideBar mode={this.state.mode} modules={this.state.modules} addModule={this.addModule.bind(this)} />
         </Sider>
         <Layout>
           <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>

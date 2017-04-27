@@ -6,9 +6,13 @@ const ItemGroup = Menu.ItemGroup
 
 class SideBar extends Component {
   handleClick (e) {
-
+    console.log(e.key)
+    this.props.addModule(e.key)
   }
   render () {
+    const menuItems = this.props.modules.map((module, index) =>
+      <Menu.Item key={index}>Module {index}</Menu.Item>
+    )
 
     return (
       <div>
@@ -16,16 +20,15 @@ class SideBar extends Component {
         <Menu
           className='side-bar-menu'
           theme='dark'
-          onClick={this.handleClick}
+          onClick={(e) => this.props.addModule(e.key)}
           mode={this.props.mode}
         >
           <ItemGroup key='sub1' title={<span><Icon type='rocket' /><span className='nav-text'>Active Modules</span></span>}>
-            <Menu.Item key='1'>Option 1</Menu.Item>
-            <Menu.Item key='2'>Option 2</Menu.Item>
+            {menuItems}
           </ItemGroup>
           <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Module</span></span>}>
-            <Menu.Item key='5' onclick={this.props} >Option 5<Icon type='plus' /></Menu.Item>
-            <Menu.Item key='6'>Option 6<Icon type='plus' /></Menu.Item>
+            <Menu.Item key='password'>Password<Icon type='plus' /></Menu.Item>
+
           </ItemGroup>
         </Menu>
       </div>
