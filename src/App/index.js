@@ -42,6 +42,11 @@ class App extends Component {
     modules.push({id: uuid(), type, state: {}, icon: allModules[type].icon})
     this.setState({modules})
   }
+  updateModule (index, state) {
+    var modules = this.state.modules.slice()
+    modules[index] = {...modules[index], state}
+    this.setState({modules})
+  }
   removeModule (index) {
     var modules = this.state.modules.slice()
     modules.splice(index, 1)
@@ -53,7 +58,7 @@ class App extends Component {
       return (
         <Card id={index} key={module.id} title={m.heading} className='module-wrapper'
           extra={<Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />}>
-          <m.element />
+          <m.element onStateChange={(state) => this.updateModule(index)} />
         </Card>)
     })
 
