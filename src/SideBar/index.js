@@ -12,7 +12,7 @@ class SideBar extends Component {
     const menuItems = this.props.modules.map((module, index) => {
       // TODO might need module to have a unique id
       // not sure what will happen when remove is implemented
-      return <Menu.Item key={index}>{module.type}</Menu.Item>
+      return <Menu.Item key={index}><a href={'#' + index}><Icon type='lock' />{module.type}</a></Menu.Item>
     })
 
     return (
@@ -36,7 +36,7 @@ class SideBar extends Component {
           selectable={false}
         >
           <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Modules</span></span>}>
-            <Menu.Item key='Password'>Password<Icon type='plus' /></Menu.Item>
+            <Menu.Item key='Password'><Icon type='lock' />Password<Icon type='plus' /></Menu.Item>
 
           </ItemGroup>
         </Menu>

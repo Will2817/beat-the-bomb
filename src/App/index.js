@@ -42,7 +42,7 @@ class App extends Component {
         case 'Password': {
           // TODO might need module to have a unique id
           // not sure what will happen when remove is implemented
-          return <PasswordModule key={index} />
+          return <div id={index}><PasswordModule key={index} /></div>
         }
         default: return null
       }
