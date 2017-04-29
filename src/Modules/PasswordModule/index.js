@@ -44,7 +44,7 @@ class PasswordModule extends Component {
     this.props.state.dials.forEach((dial, index) => {
       if (dial.length === 6) {
         passwords = passwords.filter((word) => {
-          return dial.includes(word.charAt(dial))
+          return dial.includes(word.charAt(index))
         })
       }
     })

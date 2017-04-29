@@ -19,7 +19,7 @@ class BombInfo extends Component {
           <Col className='header-col' {...colLayout}>
             <Row><label>Serial #</label></Row>
             <Row><Input value={this.props.bombInfo.serialNum}
-              onChange={(value) => this.props.handleFieldChange('serialNum', value)} /></Row>
+              onChange={(value) => this.props.handleFieldChange('serialNum', value.target.value)} /></Row>
           </Col>
           <Col className='header-col' {...colLayout}>
             <Row><label># of Strikes</label></Row>
@@ -29,13 +29,13 @@ class BombInfo extends Component {
         </Row>
         <Row className='header-row'>
           <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.carLabel}
-            onChange={(value) => this.props.handleFieldChange('carLabel', value)} >Lit CAR Label</Checkbox>
+            onChange={(value) => this.props.handleFieldChange('carLabel', value.target.checked)} >Lit CAR Label</Checkbox>
           </Col>
           <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.frkLabel}
-            onChange={(value) => this.props.handleFieldChange('frkLabel', value)}>Lit FRK Label</Checkbox>
+            onChange={(value) => this.props.handleFieldChange('frkLabel', value.target.checked)}>Lit FRK Label</Checkbox>
           </Col>
           <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.parallelPort}
-            onChange={(value) => this.props.handleFieldChange('parallelPort', value)} >Parrallel Port</Checkbox>
+            onChange={(value) => this.props.handleFieldChange('parallelPort', value.target.checked)} >Parrallel Port</Checkbox>
           </Col>
         </Row>
       </div>

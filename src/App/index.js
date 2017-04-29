@@ -5,7 +5,6 @@ import './App.css'
 import SideBar from '../SideBar'
 import BombInfo from '../BombInfo'
 import Modules from '../Modules'
-import uuid from 'uuid/v1'
 
 const { Header, Sider, Content } = Layout
 const cookies = new Cookies()
@@ -28,6 +27,7 @@ class App extends Component {
     }
     var cookieState = cookies.get('state')
     if (cookieState) {
+      cookieState = JSON.parse(new Buffer(cookieState, 'base64').toString('ascii'))
       state.bombInfo = cookieState.bombInfo
       state.modules = cookieState.modules
     }
@@ -45,7 +45,7 @@ class App extends Component {
       bombInfo,
       modules
     }
-    cookies.set('state', state, { path: '/' })
+    cookies.set('state', new Buffer(JSON.stringify(state)).toString('base64'), { path: '/' })
   }
   handleFieldChange (fieldId, value) {
     var bombInfo = {...this.state.bombInfo}
@@ -55,7 +55,8 @@ class App extends Component {
   }
   addModule (type) {
     var modules = this.state.modules.slice()
-    modules.push({id: uuid(), type, state: {...allModules[type].state}, icon: allModules[type].icon})
+    var id = (modules.length ? modules[modules.length - 1].id : 0) + 1
+    modules.push({id, type, state: {...allModules[type].state}, icon: allModules[type].icon})
     this.updateCookie(this.state.bombInfo, modules)
     this.setState({modules})
   }
@@ -82,23 +83,23 @@ class App extends Component {
     })
 
     return (
-        <Layout className='root-layout'>
-          <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse.bind(this)} >
-            <SideBar mode={this.state.mode} modules={this.state.modules} addModule={this.addModule.bind(this)} />
-          </Sider>
-          <Layout>
-            <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>
-            <Content>
-              <Row>
-                <Col span={12}>
-                  <Layout className='main-content'>
-                    {modulesContents}
-                  </Layout>
-                </Col>
-              </Row>
-            </Content>
-          </Layout>
+      <Layout className='root-layout'>
+        <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse.bind(this)} >
+          <SideBar mode={this.state.mode} modules={this.state.modules} addModule={this.addModule.bind(this)} />
+        </Sider>
+        <Layout>
+          <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>
+          <Content>
+            <Row>
+              <Col span={12}>
+                <Layout className='main-content'>
+                  {modulesContents}
+                </Layout>
+              </Col>
+            </Row>
+          </Content>
         </Layout>
+      </Layout>
     )
   }
 }
