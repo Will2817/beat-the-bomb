@@ -1,3 +1,11 @@
-.ant-layout-header .ant-form-item {
-  margin-bottom: 0;
+.ant-input-number {
+  width: 100%;
+}
+
+.header-row {
+  padding: 8px 0;
+}
+
+.header-col {
+  padding: 0 8px;
 }

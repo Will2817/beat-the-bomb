@@ -12,6 +12,8 @@
   background: 0;
   border-bottom: solid #999999;
   height: auto;
+  line-height: inherit;
+  padding: 0 16px;
 }
 
 .ant-layout-sider {
