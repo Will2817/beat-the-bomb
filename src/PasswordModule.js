@@ -29,13 +29,13 @@ class PasswordModule extends Component {
     dials[i] = letters
     // Update remaining possible passwords
     let passwords = bombPasswords.slice()
-    for (var dial in dials) {
-      if (dials[dial].length === 6) {
-        passwords = passwords.filter(function (word) {
+    dials.forEach((dial, index) => {
+      if (dial.length === 6) {
+        passwords = passwords.filter((word) => {
           return dials[dial].includes(word.charAt(dial))
         })
       }
-    }
+    })
 
     this.setState({
       dials: dials,
