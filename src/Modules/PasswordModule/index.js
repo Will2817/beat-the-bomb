@@ -71,4 +71,6 @@ class PasswordModule extends Component {
   }
 }
 
-export default PasswordModule
+export const element = PasswordModule
+export const heading = 'Password'
+export const icon = 'lock'

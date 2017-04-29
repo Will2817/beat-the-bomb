@@ -3,10 +3,15 @@ import { Layout, Button, Row, Col } from 'antd'
 import './App.css'
 import SideBar from '../SideBar'
 import BombInfo from '../BombInfo'
-import PasswordModule from '../PasswordModule'
+import Modules from '../Modules'
 import uuid from 'uuid/v1'
 
 const { Header, Sider, Content } = Layout
+
+const modules = Modules.reduce((modules, module) => {
+  modules[module.heading] = module
+  return modules
+}, {})
 
 class App extends Component {
   constructor () {
@@ -34,7 +39,7 @@ class App extends Component {
   }
   addModule (type) {
     var modules = this.state.modules.slice()
-    modules.push({id: uuid(), type})
+    modules.push({id: uuid(), type, state: {}})
     this.setState({modules})
   }
   removeModule (index) {
@@ -43,18 +48,14 @@ class App extends Component {
     this.setState({modules})
   }
   render () {
-    const modules = this.state.modules.map((module, index) => {
-      switch (module.type) {
-        case 'Password': {
-          return (<div id={index} key={module.id}>
-            <div style={{'display': 'flex', 'flex-direction': 'row'}}>
-              <h2 style={{'display': 'flex', 'flex': '1'}}>Password</h2><Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />
-            </div>
-            <PasswordModule />
-          </div>)
-        }
-        default: return null
-      }
+    const modulesContents = this.state.modules.map((module, index) => {
+      const m = modules[module.type]
+      return (<div id={index} key={module.id}>
+        <div style={{'display': 'flex', 'flexDirection': 'row'}}>
+          <h2 style={{'display': 'flex', 'flex': '1'}}>{m.heading}</h2><Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />
+        </div>
+        <m.element />
+      </div>)
     })
 
     return (
@@ -69,7 +70,7 @@ class App extends Component {
             <Row>
               <Col span={12}>
                 <Layout>
-                  {modules}
+                  {modulesContents}
                 </Layout>
               </Col>
             </Row>

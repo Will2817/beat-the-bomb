@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
+import Modules from '../Modules'
 import './SideBar.css'
 
 const ItemGroup = Menu.ItemGroup
@@ -25,8 +26,9 @@ class SideBar extends Component {
             selectable={false}
           >
             <ItemGroup key='sub2' title={<span><Icon type='file-add' /><span className='nav-text'>All Modules</span></span>}>
-              <Menu.Item key='Password'><Icon type='lock' />Password<Icon type='plus' /></Menu.Item>
-
+              {Modules.map(module => {
+                return <Menu.Item key={module.heading}><Icon type={module.icon} />{module.heading}<Icon type='plus' /></Menu.Item>
+              })}
             </ItemGroup>
           </Menu>
           <Menu
