@@ -8,7 +8,7 @@ import uuid from 'uuid/v1'
 
 const { Header, Sider, Content } = Layout
 
-const modules = Modules.reduce((modules, module) => {
+const allModules = Modules.reduce((modules, module) => {
   modules[module.heading] = module
   return modules
 }, {})
@@ -39,7 +39,7 @@ class App extends Component {
   }
   addModule (type) {
     var modules = this.state.modules.slice()
-    modules.push({id: uuid(), type, state: {}})
+    modules.push({id: uuid(), type, state: {}, icon: allModules[type].icon})
     this.setState({modules})
   }
   removeModule (index) {
@@ -49,7 +49,7 @@ class App extends Component {
   }
   render () {
     const modulesContents = this.state.modules.map((module, index) => {
-      const m = modules[module.type]
+      const m = allModules[module.type]
       return (<div id={index} key={module.id}>
         <div style={{'display': 'flex', 'flexDirection': 'row'}}>
           <h2 style={{'display': 'flex', 'flex': '1'}}>{m.heading}</h2><Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />

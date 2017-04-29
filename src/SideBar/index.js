@@ -11,7 +11,7 @@ class SideBar extends Component {
   }
   render () {
     const menuItems = this.props.modules.map((module, index) => {
-      return <Menu.Item key={module.id}><a href={'#' + index}><Icon type='lock' />{module.type}</a></Menu.Item>
+      return <Menu.Item key={module.id}><a href={'#' + index}><Icon type={module.icon} />{module.type}</a></Menu.Item>
     })
 
     return (
