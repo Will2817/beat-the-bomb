@@ -13,3 +13,19 @@
   border-bottom: solid #999999;
   height: auto;
 }
+
+.ant-layout-sider {
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-layout-sider-trigger {
+  position: inherit;
+  width: auto;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
