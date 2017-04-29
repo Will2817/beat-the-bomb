@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Cookies from 'universal-cookie'
 import { Layout, Button, Row, Col, Card } from 'antd'
 import './App.css'
 import SideBar from '../SideBar'
@@ -7,7 +8,7 @@ import Modules from '../Modules'
 import uuid from 'uuid/v1'
 
 const { Header, Sider, Content } = Layout
-
+const cookies = new Cookies()
 const allModules = Modules.reduce((modules, module) => {
   modules[module.heading] = module
   return modules
@@ -16,7 +17,7 @@ const allModules = Modules.reduce((modules, module) => {
 class App extends Component {
   constructor () {
     super()
-    this.state = {
+    var state = {
       collapsed: false,
       mode: 'inline',
       bombInfo: {
@@ -25,31 +26,49 @@ class App extends Component {
       },
       modules: []
     }
+    var cookieState = cookies.get('state')
+    if (cookieState) {
+      state.bombInfo = cookieState.bombInfo
+      state.modules = cookieState.modules
+    }
+    this.state = state
   }
+
   onCollapse (collapsed) {
     this.setState({
       collapsed,
       mode: collapsed ? 'vertical' : 'inline'
     })
   }
+  updateCookie (bombInfo, modules) {
+    var state = {
+      bombInfo,
+      modules
+    }
+    cookies.set('state', state, { path: '/' })
+  }
   handleFieldChange (fieldId, value) {
     var bombInfo = {...this.state.bombInfo}
     bombInfo[fieldId] = value
+    this.updateCookie(bombInfo, this.state.modules)
     this.setState({bombInfo})
   }
   addModule (type) {
     var modules = this.state.modules.slice()
     modules.push({id: uuid(), type, state: {...allModules[type].state}, icon: allModules[type].icon})
+    this.updateCookie(this.state.bombInfo, modules)
     this.setState({modules})
   }
   updateModule (index, state) {
     var modules = this.state.modules.slice()
     modules[index] = {...modules[index], state}
+    this.updateCookie(this.state.bombInfo, modules)
     this.setState({modules})
   }
   removeModule (index) {
     var modules = this.state.modules.slice()
     modules.splice(index, 1)
+    this.updateCookie(this.state.bombInfo, modules)
     this.setState({modules})
   }
   render () {
@@ -63,24 +82,23 @@ class App extends Component {
     })
 
     return (
-
-      <Layout className='root-layout'>
-        <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse.bind(this)} >
-          <SideBar mode={this.state.mode} modules={this.state.modules} addModule={this.addModule.bind(this)} />
-        </Sider>
-        <Layout>
-          <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>
-          <Content>
-            <Row>
-              <Col span={12}>
-                <Layout className='main-content'>
-                  {modulesContents}
-                </Layout>
-              </Col>
-            </Row>
-          </Content>
+        <Layout className='root-layout'>
+          <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse.bind(this)} >
+            <SideBar mode={this.state.mode} modules={this.state.modules} addModule={this.addModule.bind(this)} />
+          </Sider>
+          <Layout>
+            <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>
+            <Content>
+              <Row>
+                <Col span={12}>
+                  <Layout className='main-content'>
+                    {modulesContents}
+                  </Layout>
+                </Col>
+              </Row>
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
     )
   }
 }
