@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './BombInfo.css'
-import { Form, Checkbox, Input, InputNumber, Row, Col } from 'antd'
-const FormItem = Form.Item
+import { Checkbox, Input, InputNumber, Row, Col } from 'antd'
 
 class BombInfo extends Component {
   render () {

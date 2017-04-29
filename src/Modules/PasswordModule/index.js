@@ -12,34 +12,18 @@ const bombPasswords = [
 // TODO layout/components
 
 class PasswordModule extends Component {
-  constructor () {
-    super()
-    this.state = {
-      dials: Array(5).fill(''),
-      passwords: bombPasswords.slice()
-    }
-  }
   updateLetters (i, event) {
-    const dials = this.state.dials.slice()
     const letters = event.target.value
     // Prevent entering extra letters
     if (letters.length > 6) {
       return
     }
-    dials[i] = letters
-    // Update remaining possible passwords
-    let passwords = bombPasswords.slice()
-    dials.forEach((dial, index) => {
-      if (dial.length === 6) {
-        passwords = passwords.filter((word) => {
-          return dials[dial].includes(word.charAt(dial))
-        })
-      }
-    })
 
-    this.setState({
-      dials: dials,
-      passwords: passwords
+    const dials = this.props.state.dials.slice()
+    dials[i] = letters
+
+    this.props.onStateChange({
+      dials: dials
     })
   }
   renderDial (index, value) {
@@ -52,11 +36,19 @@ class PasswordModule extends Component {
     )
   }
   render () {
-    const dials = this.state.dials.map((letters, index) =>
+    const dials = this.props.state.dials.map((letters, index) =>
       this.renderDial(index, letters)
     )
 
-    const passwords = this.state.passwords.map((password) =>
+    let passwords = bombPasswords
+    this.props.state.dials.forEach((dial, index) => {
+      if (dial.length === 6) {
+        passwords = passwords.filter((word) => {
+          return dial.includes(word.charAt(dial))
+        })
+      }
+    })
+    passwords = passwords.map((password) =>
       <li key={password}>{password}</li>
     )
 
@@ -74,3 +66,4 @@ class PasswordModule extends Component {
 export const element = PasswordModule
 export const heading = 'Password'
 export const icon = 'lock'
+export const state = { dials: Array(5).fill('') }
