@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Button, Row, Col } from 'antd'
+import { Layout, Button, Row, Col, Card } from 'antd'
 import './App.css'
 import SideBar from '../SideBar'
 import BombInfo from '../BombInfo'
@@ -50,12 +50,11 @@ class App extends Component {
   render () {
     const modulesContents = this.state.modules.map((module, index) => {
       const m = allModules[module.type]
-      return (<div id={index} key={module.id}>
-        <div style={{'display': 'flex', 'flexDirection': 'row'}}>
-          <h2 style={{'display': 'flex', 'flex': '1'}}>{m.heading}</h2><Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />
-        </div>
-        <m.element />
-      </div>)
+      return (
+        <Card id={index} key={module.id} title={m.heading} className='module-wrapper'
+          extra={<Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />}>
+          <m.element />
+        </Card>)
     })
 
     return (
@@ -69,7 +68,7 @@ class App extends Component {
           <Content>
             <Row>
               <Col span={12}>
-                <Layout>
+                <Layout className='main-content'>
                   {modulesContents}
                 </Layout>
               </Col>

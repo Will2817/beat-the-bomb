@@ -7,6 +7,13 @@
 .root-layout {
   height: 100%;
 }
+.main-content {
+  padding: 16px;
+}
+
+.module-wrapper {
+  margin-bottom: 16px;
+}
 
 .ant-layout-header {
   background: 0;
