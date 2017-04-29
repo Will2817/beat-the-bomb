@@ -6,7 +6,8 @@
   "dependencies": {
     "antd": "^2.9.3",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0",

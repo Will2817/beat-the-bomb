@@ -10,15 +10,13 @@ class SideBar extends Component {
   }
   render () {
     const menuItems = this.props.modules.map((module, index) => {
-      // TODO might need module to have a unique id
-      // not sure what will happen when remove is implemented
-      return <Menu.Item key={index}><a href={'#' + index}><Icon type='lock' />{module.type}</a></Menu.Item>
+      return <Menu.Item key={module.id}><a href={'#' + index}><Icon type='lock' />{module.type}</a></Menu.Item>
     })
 
     return (
-      <div>
+      <div className='side-bar-container'>
         <div className='side-bar-logo'>B<span className='hidden-logo-text'>eat The Bomb</span></div>
-        <div>
+        <div className='menu-container'>
           <Menu
             className='side-bar-menu'
             theme='dark'

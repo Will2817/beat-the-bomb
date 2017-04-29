@@ -20,6 +20,16 @@
   margin-bottom: 16px;
 }
 
+.side-bar-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.menu-container {
+  overflow-y: auto;
+}
+
 .ant-layout-sider-collapsed .side-bar-menu .anticon {
   padding-right: 8px;
   padding-left: 8px;

@@ -4,6 +4,7 @@ import './App.css'
 import SideBar from '../SideBar'
 import BombInfo from '../BombInfo'
 import PasswordModule from '../PasswordModule'
+import uuid from 'uuid/v1'
 
 const { Header, Sider, Content } = Layout
 
@@ -33,16 +34,14 @@ class App extends Component {
   }
   addModule (type) {
     var modules = this.state.modules.slice()
-    modules.push({type})
+    modules.push({id: uuid(), type})
     this.setState({modules})
   }
   render () {
     const modules = this.state.modules.map((module, index) => {
       switch (module.type) {
         case 'Password': {
-          // TODO might need module to have a unique id
-          // not sure what will happen when remove is implemented
-          return <div id={index}><PasswordModule key={index} /></div>
+          return <div id={index}><PasswordModule key={module.id} /></div>
         }
         default: return null
       }
