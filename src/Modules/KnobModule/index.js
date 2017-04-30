@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Row, Col, Checkbox } from 'antd'
 
 const ledConfigs = [
   {
@@ -38,10 +39,11 @@ class KnobModule extends Component {
   }
   renderLed (i) {
     return (
-      <input key={i} type='checkbox' checked={this.props.state.ledConfig[i]} onChange={(e) => this.updateLeds(i, e)} />
+      <Checkbox key={i} checked={this.props.state.ledConfig[i]}
+        onChange={(e) => this.updateLeds(i, e)} />
     )
   }
-  renderMatchingDirections () {
+  renderDirection () {
     const uniqueDirections = []
     ledConfigs.forEach((config) => {
       const nonMatchingValues = this.props.state.ledConfig.filter((val, i) => {
@@ -53,11 +55,22 @@ class KnobModule extends Component {
         uniqueDirections.push(config.direction)
       }
     })
-    return uniqueDirections.map((dir) =>
-      <li key={dir}>{dir}</li>
-    )
+    if (uniqueDirections.length === 1) {
+      return (
+        <Col span={12}>
+          <p>Knob position:</p>
+          <p><strong>{uniqueDirections[0]}</strong></p>
+        </Col>
+      )
+    }
   }
   render () {
+    const colLayout = {
+      xs: 24,
+      md: 12,
+      lg: 8,
+      xl: 6
+    }
     const topRow = []
     for (var i = 0; i < 6; i++) {
       topRow.push(this.renderLed(i))
@@ -66,18 +79,16 @@ class KnobModule extends Component {
     for (i = 6; i < 12; i++) {
       bottomRow.push(this.renderLed(i))
     }
-    const possibleDirections = this.renderMatchingDirections()
+    const direction = this.renderDirection()
     return (
-      <div>
-        <h2>Leds</h2>
-        {topRow}
-        <br />
-        {bottomRow}
-        <h2>Possible Directions</h2>
-        <ul>
-          {possibleDirections}
-        </ul>
-      </div>
+      <Row>
+        <Col {...colLayout}>
+          {topRow}
+          <br />
+          {bottomRow}
+        </Col>
+        {direction}
+      </Row>
     )
   }
 }
