@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Table, Alert } from 'antd'
-import './button.css'
 
 class SimonSaysModule extends Component {
   vowelInSerial () {
@@ -18,6 +17,7 @@ class SimonSaysModule extends Component {
             break
           case 2: dataSource = [{key: '1', r: 'Green', b: 'Red', g: 'Yellow', y: 'Blue'}]
             break
+          default: dataSource = []
         }
       } else {
         switch (this.props.bombInfo.numStrikes || 0) {
@@ -27,6 +27,7 @@ class SimonSaysModule extends Component {
             break
           case 2: dataSource = [{key: '1', r: 'Yellow', b: 'Green', g: 'Blue', y: 'Red'}]
             break
+          default: dataSource = []
         }
       }
       element = (

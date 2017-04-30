@@ -103,6 +103,6 @@ class WireModule extends Component {
 }
 
 export const element = WireModule
-export const heading = 'Wire'
+export const heading = 'Wires'
 export const icon = 'bars'
 export const state = { wires: [] }

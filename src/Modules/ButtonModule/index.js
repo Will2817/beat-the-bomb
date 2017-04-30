@@ -40,7 +40,7 @@ class ButtonModule extends Component {
         />
       </div>)
     } else {
-      howToPress = <p>'Click the button'</p>
+      howToPress = <p>Click the button</p>
     }
     return (
       <div className='button-module'>
