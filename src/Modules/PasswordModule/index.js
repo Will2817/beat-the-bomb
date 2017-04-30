@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Input, Col, Row } from 'antd'
+import './password.css'
 
 const bombPasswords = [
   'about', 'after', 'again', 'below', 'could',
@@ -28,18 +30,12 @@ class PasswordModule extends Component {
   }
   renderDial (index, value) {
     return (
-      <div key={index}>
-        <label>Dial {index}</label>
-        <input type='text' value={value}
-          onChange={(e) => this.updateLetters(index, e)} />
-      </div>
+      <Input key={index} className='password-input' placeholder={'Dial ' + (index + 1)}
+        value={value} maxLength={6}
+        onChange={(e) => this.updateLetters(index, e)} />
     )
   }
-  render () {
-    const dials = this.props.state.dials.map((letters, index) =>
-      this.renderDial(index, letters)
-    )
-
+  renderPassword () {
     let passwords = bombPasswords
     this.props.state.dials.forEach((dial, index) => {
       if (dial.length === 6) {
@@ -48,17 +44,39 @@ class PasswordModule extends Component {
         })
       }
     })
-    passwords = passwords.map((password) =>
-      <li key={password}>{password}</li>
+    if (passwords.length === 1) {
+      return (
+        <div>
+          <p>Password:</p>
+          <p><strong>{passwords[0]}</strong></p>
+        </div>
+      )
+    } else {
+      return (
+        <p>{passwords.length} passwords remaining.</p>
+      )
+    }
+  }
+  render () {
+    const colLayout = {
+      xs: 24,
+      sm: 12,
+      md: 6,
+      lg: 4
+    }
+    const dials = this.props.state.dials.map((letters, index) =>
+      this.renderDial(index, letters)
     )
 
     return (
-      <div>
-        <h2>Dials</h2>
-        {dials}
-        <h2>{passwords.length > 1 ? 'Remaining Passwords' : 'Password'}</h2>
-        <ul> {passwords} </ul>
-      </div>
+      <Row className='password-module'>
+        <Col {...colLayout}>
+          {dials}
+        </Col>
+        <Col sm={{offset: 1, span: 11}} xs={24}>
+          {this.renderPassword()}
+        </Col>
+      </Row>
     )
   }
 }

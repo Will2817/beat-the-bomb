@@ -91,7 +91,7 @@ class App extends Component {
           <Header><BombInfo bombInfo={this.state.bombInfo} handleFieldChange={this.handleFieldChange.bind(this)} /></Header>
           <Content>
             <Row>
-              <Col xs={24} sm={12}>
+              <Col xs={24} lg={12}>
                 <Layout className='main-content'>
                   {modulesContents}
                 </Layout>
