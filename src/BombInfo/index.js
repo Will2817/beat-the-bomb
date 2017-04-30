@@ -12,7 +12,7 @@ class BombInfo extends Component {
       <div>
         <Row className='header-row'>
           <Col className='header-col' {...colLayout}>
-            <Row><label># of Batteries</label></Row>
+            <Row><label>Batteries</label></Row>
             <Row><InputNumber value={this.props.bombInfo.numBatteries}
               onChange={(value) => this.props.handleFieldChange('numBatteries', value)} /></Row>
           </Col>
@@ -22,20 +22,20 @@ class BombInfo extends Component {
               onChange={(value) => this.props.handleFieldChange('serialNum', value.target.value)} /></Row>
           </Col>
           <Col className='header-col' {...colLayout}>
-            <Row><label># of Strikes</label></Row>
+            <Row><label>Strikes</label></Row>
             <Row><InputNumber value={this.props.bombInfo.numStrikes}
               onChange={(value) => this.props.handleFieldChange('numStrikes', value)} /></Row>
           </Col>
         </Row>
         <Row className='header-row'>
           <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.carLabel}
-            onChange={(value) => this.props.handleFieldChange('carLabel', value.target.checked)} >Lit CAR Label</Checkbox>
+            onChange={(value) => this.props.handleFieldChange('carLabel', value.target.checked)}>Lit CAR</Checkbox>
           </Col>
           <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.frkLabel}
-            onChange={(value) => this.props.handleFieldChange('frkLabel', value.target.checked)}>Lit FRK Label</Checkbox>
+            onChange={(value) => this.props.handleFieldChange('frkLabel', value.target.checked)}>Lit FRK</Checkbox>
           </Col>
           <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.parallelPort}
-            onChange={(value) => this.props.handleFieldChange('parallelPort', value.target.checked)} >Parrallel Port</Checkbox>
+            onChange={(value) => this.props.handleFieldChange('parallelPort', value.target.checked)} >Parallel Port</Checkbox>
           </Col>
         </Row>
       </div>
