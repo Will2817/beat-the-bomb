@@ -72,12 +72,22 @@ class App extends Component {
     this.updateCookie(this.state.bombInfo, modules)
     this.setState({modules})
   }
+  resetModule (index) {
+    var modules = this.state.modules.slice()
+    var state = {...allModules[modules[index].type].state}
+    modules[index] = {...modules[index], state}
+    this.updateCookie(this.state.bombInfo, modules)
+    this.setState({modules})
+  }
   render () {
     const modulesContents = this.state.modules.map((module, index) => {
       const m = allModules[module.type]
       return (
         <Card id={index} key={module.id} title={m.heading} className='module-wrapper'
-          extra={<Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />}>
+          extra={<div>
+            <Button type='primary' icon='reload' onClick={() => this.resetModule(index)} />
+            <Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />
+          </div>}>
           <m.element bombInfo={this.state.bombInfo} state={module.state} onStateChange={(state) => this.updateModule(index, state)} />
         </Card>)
     })
