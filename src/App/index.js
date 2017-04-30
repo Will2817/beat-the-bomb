@@ -78,7 +78,7 @@ class App extends Component {
       return (
         <Card id={index} key={module.id} title={m.heading} className='module-wrapper'
           extra={<Button type='danger' icon='delete' onClick={() => this.removeModule(index)} />}>
-          <m.element state={module.state} onStateChange={(state) => this.updateModule(index, state)} />
+          <m.element bombInfo={this.state.bombInfo} state={module.state} onStateChange={(state) => this.updateModule(index, state)} />
         </Card>)
     })
 
