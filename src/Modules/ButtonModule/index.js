@@ -71,6 +71,6 @@ class ButtonModule extends Component {
 }
 
 export const element = ButtonModule
-export const heading = 'Button'
+export const heading = 'The Button'
 export const icon = 'play-circle-o'
 export const state = { }

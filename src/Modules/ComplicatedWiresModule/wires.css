@@ -1,0 +1,14 @@
+.complicated-wires-module .input-column > * {
+  height: 16px;
+  min-height: 16px;
+  line-height: 16px;
+}
+
+.complicated-wires-module .input-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.complicated-wires-module .input-column .ant-checkbox-wrapper {
+  margin: auto;
+}

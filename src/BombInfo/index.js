@@ -28,13 +28,13 @@ class BombInfo extends Component {
           </Col>
         </Row>
         <Row className='header-row'>
-          <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.carLabel}
+          <Col className='header-col' {...colLayout}><Checkbox checked={this.props.bombInfo.carLabel}
             onChange={(value) => this.props.handleFieldChange('carLabel', value.target.checked)}>Lit CAR</Checkbox>
           </Col>
-          <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.frkLabel}
+          <Col className='header-col' {...colLayout}><Checkbox checked={this.props.bombInfo.frkLabel}
             onChange={(value) => this.props.handleFieldChange('frkLabel', value.target.checked)}>Lit FRK</Checkbox>
           </Col>
-          <Col className='header-col' {...colLayout}><Checkbox value={this.props.bombInfo.parallelPort}
+          <Col className='header-col' {...colLayout}><Checkbox checked={this.props.bombInfo.parallelPort}
             onChange={(value) => this.props.handleFieldChange('parallelPort', value.target.checked)} >Parallel Port</Checkbox>
           </Col>
         </Row>
