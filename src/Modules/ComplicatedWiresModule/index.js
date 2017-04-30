@@ -54,11 +54,11 @@ class ComplicatedWiresModule extends Component {
     var result = cutLookup[wire.red || false][wire.blue || false][wire.star || false][wire.led || false]
     var serialNum = this.props.bombInfo.serialNum || ''
     switch (result) {
-      case 'C': return true
-      case 'S': return (Number(serialNum[serialNum.length - 1]) % 2 === 0)
-      case 'P': return this.props.bombInfo.parallelPort
-      case 'B': return this.props.bombInfo.numBatteries >= 2
-      default: return false
+      case 'C': return ({err: null, cut: true})
+      case 'S': return ({err: (!serialNum) ? 'Missing "Serial #" field' : '', cut: (Number(serialNum[serialNum.length - 1]) % 2 === 0)})
+      case 'P': return ({err: null, cut: this.props.bombInfo.parallelPort})
+      case 'B': return ({err: null, cut: this.props.bombInfo.numBatteries >= 2})
+      default: return ({err: null, cut: false})
     }
   }
   handleChange (index, field, checked) {
@@ -69,15 +69,20 @@ class ComplicatedWiresModule extends Component {
     this.props.onStateChange({...this.props.state, wires})
   }
   render () {
+    var error
     var wires = this.props.state.wires.map((wire, index) => {
-      var result = this.cutWire(wire) ? <Icon type='check' /> : ''
+      var result = this.cutWire(wire)
+      if (result.err) {
+        error = (<Alert message={result.err} type='error' />)
+      }
+      var cut = result.cut ? <Icon type='check' /> : ''
       return (
         <Col key={index} span={3} className='input-column'>
           <Checkbox checked={wire.led} onChange={(e) => this.handleChange(index, 'led', e.target.checked)} />
           <Checkbox checked={wire.red} onChange={(e) => this.handleChange(index, 'red', e.target.checked)} />
           <Checkbox checked={wire.blue} onChange={(e) => this.handleChange(index, 'blue', e.target.checked)} />
           <Checkbox checked={wire.star} onChange={(e) => this.handleChange(index, 'star', e.target.checked)} />
-          {result}
+          {cut}
         </Col>
       )
     })
@@ -97,6 +102,7 @@ class ComplicatedWiresModule extends Component {
             {wires}
           </Row>
         </div>
+        {error}
       </div>
     )
   }
