@@ -1,0 +1,10 @@
+.wire-module .buttons-container, .wire-module .wire-list {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.wire-module .color-buttons {
+  display: flex;
+  flex: 1;
+}

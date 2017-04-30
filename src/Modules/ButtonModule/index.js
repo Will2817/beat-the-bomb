@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Radio, Alert } from 'antd'
+import { Table, Row, Col, Radio, Alert } from 'antd'
 import './button.css'
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
@@ -18,7 +18,9 @@ class ButtonModule extends Component {
       return false
     } else if (color === 'y') {
       return true
-    } else if (color === 'r' && word === 'h') { return false }
+    } else if (color === 'r' && word === 'h') {
+      return false
+    }
     return true
   }
   onChange (e, field) {
@@ -43,19 +45,25 @@ class ButtonModule extends Component {
     return (
       <div className='button-module'>
         <Alert message='This module may require the following fields: "Batteries", "Lit CAR", "Lit FRK"' type='info' />
-        <RadioGroup onChange={(e) => this.onChange(e, 'color')} value={this.props.state.color}>
-          <RadioButton value='b'>Blue</RadioButton>
-          <RadioButton value='r'>Red</RadioButton>
-          <RadioButton value='y'>Yellow</RadioButton>
-          <RadioButton value='w'>White</RadioButton>
-          <RadioButton value='o'><i>Other</i></RadioButton>
-        </RadioGroup>
-        <RadioGroup onChange={(e) => this.onChange(e, 'word')} value={this.props.state.word}>
-          <RadioButton value='a'>Abort</RadioButton>
-          <RadioButton value='d'>Detonate</RadioButton>
-          <RadioButton value='h'>Hold</RadioButton>
-          <RadioButton value='o'><i>Other</i></RadioButton>
-        </RadioGroup>
+        <Row>
+          <Col xs={24} sm={12} style={{ paddingRight: '10px' }}>
+            <RadioGroup onChange={(e) => this.onChange(e, 'color')} value={this.props.state.color}>
+              <RadioButton value='b'>Blue</RadioButton>
+              <RadioButton value='r'>Red</RadioButton>
+              <RadioButton value='y'>Yellow</RadioButton>
+              <RadioButton value='w'>White</RadioButton>
+              <RadioButton value='o'><i>Other</i></RadioButton>
+            </RadioGroup>
+          </Col>
+          <Col xs={24} sm={12}>
+            <RadioGroup onChange={(e) => this.onChange(e, 'word')} value={this.props.state.word}>
+              <RadioButton value='a'>Abort</RadioButton>
+              <RadioButton value='d'>Detonate</RadioButton>
+              <RadioButton value='h'>Hold</RadioButton>
+              <RadioButton value='o'><i>Other</i></RadioButton>
+            </RadioGroup>
+          </Col>
+        </Row>
         {howToPress}
       </div>
     )
