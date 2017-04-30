@@ -5,7 +5,19 @@
 .header-row {
   padding: 8px 0;
 }
+.header-row:first-child {
+  padding-top: 16px;
+}
+.header-row:last-child {
+  padding-bottom: 16px;
+}
 
 .header-col {
   padding: 0 8px;
+}
+.header-col:first-child {
+  padding-left: 16px;
+}
+.header-col:last-child {
+  padding-right: 16px;
 }
