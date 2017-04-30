@@ -1,3 +1,4 @@
 export default [
-  require('./PasswordModule')
+  require('./PasswordModule'),
+  require('./KnobModule')
 ]
