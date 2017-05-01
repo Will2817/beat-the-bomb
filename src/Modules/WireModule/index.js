@@ -27,7 +27,7 @@ class WireModule extends Component {
   }
   wireToCut () {
     const {wires} = this.props.state
-    const {serialNum} = this.props.bombInfo
+    const {serialNum} = this.props.bombInfo || ''
     const count = wires.reduce((count, wire) => {
       count[wire] = (count[wire] || 0) + 1
       return count
