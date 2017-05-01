@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Input, Icon, Table, Row, Col } from 'antd'
+import { AutoComplete, Icon, Table, Row, Col } from 'antd'
+import './WhosOnFirst.css'
 
 const columns = [{
   dataIndex: 'col1'
@@ -69,8 +70,8 @@ class WhosOnFirstModule extends Component {
       <div className='whos-on-first-module'>
         <Row>
           <Col span={8}>
-            <Input value={this.props.state.display} maxLength={8}
-              onChange={(e) => this.onUpdateField('display', e.target.value.toUpperCase())} />
+            <AutoComplete value={this.props.state.display} dataSource={Object.keys(words)}
+              onChange={(value) => this.onUpdateField('display', value.toUpperCase())} />
           </Col>
           <Col span={4}>
             <Table columns={columns} dataSource={data} size='middle' showHeader={false} bordered pagination={false} />
@@ -78,8 +79,8 @@ class WhosOnFirstModule extends Component {
         </Row>
         <Row>
           <Col span={8}>
-            <Input value={this.props.state.button} maxLength={8}
-              onChange={(e) => this.onUpdateField('button', e.target.value.toUpperCase())} />
+            <AutoComplete value={this.props.state.button} dataSource={Object.keys(words)}
+              onChange={(value) => this.onUpdateField('button', value.toUpperCase())} />
           </Col>
         </Row>
         <h3>Press first button that appears in list</h3>
