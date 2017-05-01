@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-import { AutoComplete, Icon, Table, Row, Col } from 'antd'
+import { AutoComplete, Icon, Row, Col } from 'antd'
 import './WhosOnFirst.css'
-
-const columns = [{
-  dataIndex: 'col1'
-}, {
-  dataIndex: 'col2'
-}]
 
 const displayList = [
   'YES', 'FIRST', 'DISPLAY', 'OKAY', 'SAYS', 'NOTHING', 'BLANK', 'NO', 'LED', 'LEAD', 'READ', 'RED', 'REED', 'LEED',
@@ -49,50 +43,98 @@ wordList.sort()
 
 class WhosOnFirstModule extends Component {
 
+  getPosition() {
+    switch (this.props.state.display) {
+      case 'UR':
+        return { row : 1, col : 1 }
+      case 'FIRST':
+      case 'OKAY':
+      case 'C':
+        return { row : 1, col : 2 }
+      case 'YES':
+      case 'NOTHING':
+      case 'LED':
+      case 'THEY ARE':
+        return { row : 2, col : 1 }
+      case 'BLANK':
+      case 'READ':
+      case 'RED':
+      case 'YOU':
+      case 'YOUR':
+      case 'YOU\'RE':
+      case 'THEIR':
+        return { row : 2, col : 2 }
+      case '':
+      case 'REED':
+      case 'LEED':
+      case 'THEY\'RE':
+        return { row : 3, col : 1 }
+      case 'DISPLAY':
+      case 'SAYS':
+      case 'NO':
+      case 'LEAD':
+      case 'HOLD ON':
+      case 'YOU ARE':
+      case 'THERE':
+      case 'SEE':
+      case 'CEE':
+        return { row : 3, col : 2 }
+      default:
+        return {}
+    }
+  }
   onUpdateField (field, value) {
     var state = {...this.props.state}
     state[field] = value
     this.props.onStateChange(state)
   }
   render () {
-    const display = this.props.state.display
+    const position = this.getPosition()
     const icon = (<Icon type='eye-o' />)
-    const data = [{
-      key: '1',
-      col1: display === 'UR' ? icon : '',
-      col2: display === 'FIRST' || display === 'OKAY' || display === 'C' ? icon : ''
-    }, {
-      key: '2',
-      col1: display === 'YES' || display === 'NOTHING' || display === 'LED' || display === 'THEY ARE' ? icon : '',
-      col2: display === 'BLANK' || display === 'READ' || display === 'RED' || display === 'YOU' ||
-            display === 'YOUR' || display === 'YOU\'RE' || display === 'THEIR' ? icon : ''
-    }, {
-      key: '3',
-      col1: !display || display === 'REED' || display === 'LEED' || display === 'THEY\'RE' ? icon : '',
-      col2: display === 'DISPLAY' || display === 'SAYS' || display === 'NO' || display === 'LEAD' ||
-            display === 'HOLD ON' || display === 'YOU ARE' || display === 'THERE' || display === 'SEE' ||
-            display === 'CEE' ? icon : ''
-    }]
     const buttons = words[this.props.state.button]
     return (
       <div className='whos-on-first-module'>
         <Row>
-          <Col span={8}>
-            <AutoComplete placeholder='Display' value={this.props.state.display} dataSource={displayList}
-              onChange={(value) => this.onUpdateField('display', value.toUpperCase())} />
+          <Col span={12} className='step-column'>
+            <AutoComplete className='display-input' placeholder='Display' value={this.props.state.display}
+              dataSource={displayList} onChange={(value) => this.onUpdateField('display', value.toUpperCase())} />
+
+            <Row className='table-row'>
+              <Col span={12} className='table-column'>
+                {position.row === 1 && position.col === 1 ? icon : ''}
+              </Col>
+              <Col span={12} className='table-column'>
+                {position.row === 1 && position.col === 2 ? icon : ''}
+              </Col>
+            </Row>
+
+            <Row className='table-row'>
+              <Col span={12} className='table-column'>
+                {position.row === 2 && position.col === 1 ? icon : ''}
+              </Col>
+              <Col span={12} className='table-column'>
+                {position.row === 2 && position.col === 2 ? icon : ''}
+              </Col>
+            </Row>
+
+            <Row className='table-row'>
+              <Col span={12} className='table-column'>
+                {position.row === 3 && position.col === 1 ? icon : ''}
+              </Col>
+              <Col span={12} className='table-column'>
+                {position.row === 3 && position.col === 2 ? icon : ''}
+              </Col>
+            </Row>
           </Col>
-          <Col span={4}>
-            <Table columns={columns} dataSource={data} size='middle' showHeader={false} bordered pagination={false} />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={8}>
-            <AutoComplete placeholder='Label' value={this.props.state.button} dataSource={wordList}
+
+          <Col span={12} className='step-column'>
+            <AutoComplete className='label-input' placeholder='Label' value={this.props.state.button} dataSource={wordList}
               onChange={(value) => this.onUpdateField('button', value.toUpperCase())} />
+
+            <h3>Click the first label that appears in the list:</h3>
+            {buttons}
           </Col>
         </Row>
-        <h3>Press first button that appears in this list:</h3>
-        {buttons}
       </div>
     )
   }

@@ -1,3 +1,38 @@
 .whos-on-first-module .ant-select-auto-complete {
-    width: 100%;
+  width: 100%;
+}
+
+.whos-on-first-module .step-column {
+  padding: 0 8px;
+}
+.whos-on-first-module .step-column:first-child {
+  padding-left: 0;
+}
+.whos-on-first-module .step-column:last-child {
+  padding-right: 0;
+}
+
+.whos-on-first-module .table-row {
+  border-bottom: 1px solid #d9d9d9;
+}
+.whos-on-first-module .table-column {
+  border-right: 1px solid #d9d9d9;
+  height: 28px;
+  min-height: 28px;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 2px;
+  text-align: center;
+}
+.whos-on-first-module .table-column:first-child {
+  border-left: 1px solid #d9d9d9;
+}
+
+.whos-on-first-module .display-input .ant-input {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.whos-on-first-module .label-input {
+  margin-bottom: 10px;
 }
