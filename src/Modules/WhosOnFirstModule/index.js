@@ -8,6 +8,12 @@ const columns = [{
   dataIndex: 'col2'
 }]
 
+const displayList = [
+  'YES', 'FIRST', 'DISPLAY', 'OKAY', 'SAYS', 'NOTHING', 'BLANK', 'NO', 'LED', 'LEAD', 'READ', 'RED', 'REED', 'LEED',
+  'HOLD ON', 'YOU', 'YOU ARE', 'YOUR', 'YOU\'RE', 'UR', 'THERE', 'THEY\'RE', 'THEIR', 'THEY ARE', 'SEE', 'C', 'CEE'
+]
+displayList.sort()
+
 const words = {
   'READY': 'YES, OKAY, WHAT, MIDDLE, LEFT, PRESS, RIGHT, BLANK, READY, NO, FIRST, UHHH, NOTHING, WAIT',
   'FIRST': 'LEFT, OKAY, YES, MIDDLE, NO, RIGHT, NOTHING, UHHH, WAIT, READY, BLANK, WHAT, PRESS, FIRST',
@@ -38,6 +44,8 @@ const words = {
   'SURE': 'YOU ARE, DONE, LIKE, YOU\'RE, YOU, HOLD, UH HUH, UR, SURE, U, WHAT?, NEXT, YOUR, UH UH',
   'LIKE': 'YOU\'RE, NEXT, U, UR, HOLD, DONE, UH UH, WHAT?, UH HUH, YOU, LIKE, SURE, YOU ARE, YOUR'
 }
+const wordList = Object.keys(words)
+wordList.sort()
 
 class WhosOnFirstModule extends Component {
 
@@ -70,7 +78,7 @@ class WhosOnFirstModule extends Component {
       <div className='whos-on-first-module'>
         <Row>
           <Col span={8}>
-            <AutoComplete value={this.props.state.display} dataSource={Object.keys(words)}
+            <AutoComplete placeholder='Display' value={this.props.state.display} dataSource={displayList}
               onChange={(value) => this.onUpdateField('display', value.toUpperCase())} />
           </Col>
           <Col span={4}>
@@ -79,11 +87,11 @@ class WhosOnFirstModule extends Component {
         </Row>
         <Row>
           <Col span={8}>
-            <AutoComplete value={this.props.state.button} dataSource={Object.keys(words)}
+            <AutoComplete placeholder='Label' value={this.props.state.button} dataSource={wordList}
               onChange={(value) => this.onUpdateField('button', value.toUpperCase())} />
           </Col>
         </Row>
-        <h3>Press first button that appears in list</h3>
+        <h3>Press first button that appears in this list:</h3>
         {buttons}
       </div>
     )
