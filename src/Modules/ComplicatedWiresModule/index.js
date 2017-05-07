@@ -6,44 +6,44 @@ const cutLookup = {
   'true': {
     'true': {
       'true': {
-        'true': 'D',
-        'false': 'D'
+        'true': 'D', // r,b,s,o
+        'false': 'P' // r,b,s
       },
       'false': {
-        'true': 'S',
-        'false': 'S'
+        'true': 'S', // r,b,o
+        'false': 'S' // r,b
       }
     },
     'false': {
       'true': {
-        'true': 'B',
-        'false': 'C'
+        'true': 'B', // r,s,o
+        'false': 'C' // r,s
       },
       'false': {
-        'true': 'B',
-        'false': 'S'
+        'true': 'B', // r,o
+        'false': 'S' // r
       }
     }
   },
   'false': {
     'true': {
       'true': {
-        'true': 'P',
-        'false': 'D'
+        'true': 'P', // b,s,o
+        'false': 'D' // b,s
       },
       'false': {
-        'true': 'D',
-        'false': 'S'
+        'true': 'P', // b,o
+        'false': 'S' // b
       }
     },
     'false': {
       'true': {
-        'true': 'B',
-        'false': 'C'
+        'true': 'B', // s,o
+        'false': 'C' // s
       },
       'false': {
-        'true': 'D',
-        'false': 'C'
+        'true': 'D', // o
+        'false': 'C' // none
       }
     }
   }
