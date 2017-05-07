@@ -39,7 +39,7 @@ const cutLookup = {
     'false': {
       'true': {
         'true': 'B',
-        'false': 'D'
+        'false': 'C'
       },
       'false': {
         'true': 'D',
