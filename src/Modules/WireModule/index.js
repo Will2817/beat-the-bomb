@@ -55,9 +55,9 @@ class WireModule extends Component {
       case 6:
         if (!serialNum) return {error: 'Missing "Serial #" field'}
         else if (count['y'] === 0 && oddLastdigit) return {position: 3}
-        else if (count['y'] === 1 && count['w'] > 1) return {position: 'fourth'}
-        else if (!count['r']) return {position: 'last'}
-        return {position: 'fourth'}
+        else if (count['y'] === 1 && count['w'] > 1) return {position: 4}
+        else if (!count['r']) return {position: 6}
+        return {position: 4}
       default:
         return {}
     }
