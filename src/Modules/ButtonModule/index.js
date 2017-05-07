@@ -10,7 +10,7 @@ class ButtonModule extends Component {
     const {numBatteries, frkLabel, carLabel} = this.props.bombInfo
     if (color === 'b' && word === 'a') {
       return true
-    } else if (word === 'd' || numBatteries > 1) {
+    } else if (word === 'd' && numBatteries > 1) {
       return false
     } else if (color === 'w' && carLabel) {
       return true
